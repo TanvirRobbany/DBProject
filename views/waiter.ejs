@@ -7,18 +7,34 @@
     <link rel="stylesheet" href="table.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Employee</title>
+    <title>Waiter</title>
 </head>
 <body>
     <div class="row">
         <div class="col-lg-12 col-md-6 col-lg-3">
+            <h1 style="text-align: center;">WAITER</h1>
             <table>
+                <tr>
                 <th>ID</th>
                 <th>NAME</th>
                 <th>PHONE NUMBER</th>
                 <th>E-MAIL</th>
                 <th>ADDRESS</th>
                 <tH>SALARY</tH>
+                <th>Action</th>
+                </tr>
+                <!--  showing waiter details on webpage from database -->
+                <% waiters.forEach(waiter => { %>
+                    <tr>
+                        <td><%= waiter.idWaiter %></td>
+                        <td><%= waiter.name %></td>
+                        <td><%= waiter.phoneNumber %></td>
+                        <td><%= waiter.email %></td>
+                        <td><%= waiter.address %></td>
+                        <td><%= waiter.salary %></td>
+                        <td><a href='/waiterDelete/<%= waiter.idWaiter %>' ><button class="btn btn-danger" >Delete</button></a><a href='/waiterEdit/<%= waiter.idWaiter %>'><button class="btn btn-warning">Edit</button></a></td>
+                    </tr>
+                <% }) %>
             </table>
         </div>
     </div>

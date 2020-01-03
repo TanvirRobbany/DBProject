@@ -17,14 +17,14 @@
 
 .center{
     display: flex;
-    justify-content: right;
+    justify-content: center;
 }
 
-/* table */
-/* .position{
+/* table
+ .position{
     display: flex;
     justify-content: left;
-} */
+} 
 
 table{
     font-family: arial, sans-serif;
@@ -39,4 +39,4 @@ td,th{
 
 tr:nth-child(even){
     background-color: #dddddd;
-}
+} *?
