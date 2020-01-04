@@ -4,7 +4,7 @@ exports.getMenuAdd = function (req, res) {
     res.render("manage.ejs");
 }
 
-exports.addMenu =  function (req, res) {
+exports.addMenu = function (req, res) {
     console.log(req.body);
     connection.query(`INSERT INTO menu(catagory, itemName, price) VALUES('${req.body.catagory}', '${req.body.name}', ${req.body.price})`, function (error, results, fields) {
         if (error) throw error;
@@ -15,7 +15,7 @@ exports.addMenu =  function (req, res) {
         }
     });
 }
-exports.getOneMenu= function (req,res){
+exports.getOneMenu = function (req, res) {
     connection.query(`Select * from menu where idMenu=${req.params.id}`, function (error, results, fields) {
         if (error) throw error;
         if (results) {
@@ -27,7 +27,7 @@ exports.getOneMenu= function (req,res){
 
 }
 
-exports.updateOneMenu = function (req,res){
+exports.updateOneMenu = function (req, res) {
     connection.query(`UPDATE menu SET catagory = '${req.body.catagory}', itemName='${req.body.name}', price=${req.body.price} WHERE idMenu = ${req.params.id}`, function (error, results, fields) {
         if (error) throw error;
         if (results) {
@@ -39,7 +39,7 @@ exports.updateOneMenu = function (req,res){
 
 }
 
-exports.getAllMenu =  function (req, res) {
+exports.getAllMenu = function (req, res) {
     connection.query(`Select * from menu`, function (error, results, fields) {
         if (error) throw error;
         if (results) {
@@ -51,13 +51,13 @@ exports.getAllMenu =  function (req, res) {
 
 }
 
-exports.deleteOneMenu = function(req,res){
+exports.deleteOneMenu = function (req, res) {
     connection.query(`Delete from menu where idMenu=${req.params.id}`, function (error, results, fields) {
-       if (error) throw error;
-       if (results) {
-           console.log(results);
-           res.redirect('/menu');
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            res.redirect('/menu');
 
-       }
-   });
+        }
+    });
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,30 +8,29 @@
     <link rel="stylesheet" href="table.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Customer</title>
+    <title>Menu</title>
 </head>
+
 <body>
     <div class="row">
         <div class="col-lg-12 col-md-6 col-lg-3">
-            <h1 style="text-align: center;">CUSTOMER</h1>
+            <h1 style="text-align: center;">MENU</h1>
             <table>
-                <tr>    
+                <tr>
                 <th>ID</th>
-                <th>NAME</th>
-                <th>PHONE NUMBER</th>
-                <th>E-MAIL</th>
-                <!-- <th>Action</th> -->
-                </tr>
-                <!--  showing customer details on webpage from database -->
-                <% customers.forEach(customer => { %>
-                    <tr>
-                        <td><%= customer.idCustomer %></td>
-                        <td><%= customer.name %></td>
-                        <td><%= customer.phoneNumber %></td>
-                        <td><%= customer.email %></td>
-                        <!-- <td><a href='/customerDelete/<%= customer.idCustomer %>' ><button class="btn btn-danger" >Delete</button></a><button class="btn btn-warning">Edit</a></button></td> -->
-                    </tr>
-                <% }) %>
+                <th>CATAGORY</th>
+                <th>ITEM NAME</th>
+                <th>PRICE</th>
+            </tr>
+            <!-- // showing menu details on webpage from database -->
+            <% menus.forEach(menu => { %>
+            <tr>
+                 <td><%= menu.idMenu %></td>   
+                 <td><%= menu.catagory %></td>   
+                 <td><%= menu.itemName %></td>
+                 <td><%= menu.price %></td>   
+            </tr>
+            <% }) %>
             </table>
         </div>
     </div>
@@ -45,4 +45,5 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

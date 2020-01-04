@@ -17,3 +17,11 @@ td,th{
 tr:nth-child(even){
     background-color: #dddddd;
 }
+
+.btn{
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: "montserrat";
+    cursor: pointer;
+    margin: 10px;
+}

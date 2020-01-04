@@ -9,4 +9,4 @@ var connection = mysql.createConnection({
 // database connection
 connection.connect();
 
-module.exports=connection;
+module.exports = connection;
