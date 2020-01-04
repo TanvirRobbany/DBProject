@@ -21,6 +21,14 @@ router.post('/managerEdit/:id', managerHelper.updateOneManager);
 //delete one manager
 router.get('/managerDelete/:id', managerHelper.deleteOneManager);
 
+// //get sell menu
+  router.get('/sell', managerHelper.getSellMenu);
+
+// // //get statement
+router.get('/sellstatements', managerHelper.getSellStatements);
+
+router.get('/sell/:id', managerHelper.postSellStatements);
+router.get('/sellstatements/:id', managerHelper.postSellStatements);
 
 
 module.exports = router;

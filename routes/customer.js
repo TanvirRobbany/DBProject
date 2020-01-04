@@ -8,4 +8,7 @@ router.get('/customer', customerHelper.getAllCustomer);
 //showing all menu to customer
 router.get('/menuC', customerHelper.getAllMenu);
 
+//go to regitration page
+router.post('/registration', customerHelper.getRegistered);
+
 module.exports = router;

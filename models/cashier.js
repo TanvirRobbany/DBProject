@@ -64,3 +64,19 @@ exports.updateOneCashier = function (req, res) {
         });
     }
 }
+
+// exports.getSellMenu = function(req,res){
+//     if (!req.session.cashier) {
+//         res.redirect('/');
+//     }
+//     else {
+//         connection.query(`Select * from menu`, function (error, results, fields) {
+//             if (error) throw error;
+//             if (results) {
+//                 console.log(results);
+//                 res.render('sellmenu.ejs', { menus: results });
+
+//             }
+//         });
+//     }
+// }

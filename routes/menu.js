@@ -5,10 +5,10 @@ const menuHelper = require('../models/menu')
 
 
 // menu adding route
-router.get('/manage', menuHelper.getMenuAdd);
+router.get('/addmenu', menuHelper.getMenuAdd);
 
 // adding menu
-router.post('/manage', menuHelper.addMenu);
+router.post('/addmenu', menuHelper.addMenu);
 
 
 // menu edit

@@ -29,7 +29,7 @@ exports.addEmployee = function (req, res) {
                 if (error) throw error;
                 if (results) {
                     console.log('Done');
-                    res.redirect('/employee')
+                    res.redirect('/manager')
 
                 }
             });
@@ -39,7 +39,7 @@ exports.addEmployee = function (req, res) {
                 if (error) throw error;
                 if (results) {
                     // console.log('Done');
-                    res.redirect('/employee')
+                    res.redirect('/cashier')
 
                 }
             });
@@ -50,14 +50,14 @@ exports.addEmployee = function (req, res) {
                 if (error) throw error;
                 if (results) {
                     console.log('Done');
-                    res.redirect('/employee')
+                    res.redirect('/waiter')
 
                 }
             });
         }
 
         else {
-            console.log("None of the type is selected...");
+            response.send("No Type Is Selected!");
         }
     }
 }
@@ -120,6 +120,57 @@ exports.deleteOneManager = function (req, res) {
             if (results) {
                 console.log(results);
                 res.redirect('/manager');
+
+            }
+        });
+    }
+}
+
+exports.getSellMenu = function(req,res){
+    console.log(req.session.cashier)
+    if (!req.session.manager && !req.session.cashier) {
+        res.redirect('/');
+    }
+    else {
+        connection.query(`Select * from menu`, function (error, results, fields) {
+            if (error) throw error;
+            if (results) {
+                console.log(results);
+                res.render('sellmenu.ejs', { menus: results });
+
+            }
+        });
+    }
+}
+
+exports.getSellStatements = function(req,res){
+    if (!req.session.manager) {
+        res.redirect('/');
+    }
+    else {
+        connection.query(`Select * from balance`, function (error, results, fields) {
+            if (error) throw error;
+            if (results) {
+                console.log(results);
+                res.render('sellStatements.ejs', { balances: results });
+
+            }
+        });
+    }
+}
+
+
+exports.postSellStatements = function(req,res){
+    if (!req.session.manager && !req.session.cashier) {
+        res.redirect('/');
+    }
+    else {
+        console.log(`Cashier ID: ${req.session.id} & menuId: ${req.params.id}`)
+        connection.query(`INSERT INTO salestats(receivedBy,idMenu) VALUES('${req.session.email}',${req.params.id})`, function (error, results, fields) {
+            if (error) throw error;
+            if (results) {
+                console.log(results);
+                res.redirect('/sell');
 
             }
         });

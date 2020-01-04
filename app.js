@@ -17,11 +17,7 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
-app.use(menuRoutes);
-app.use(managerRoutes);
-app.use(cashierRoutes);
-app.use(waiterRoutes);
-app.use(customerRoutes);
+
 
 
 var mysql = require('mysql');
@@ -55,6 +51,11 @@ app.get('/', function (req, res) {
     res.render("login.ejs");
 });
 
+app.use(menuRoutes);
+app.use(managerRoutes);
+app.use(cashierRoutes);
+app.use(waiterRoutes);
+app.use(customerRoutes);
 
 
 // customer registration route
@@ -62,19 +63,6 @@ app.get('/registration', function (req, res) {
     res.render("registration.ejs");
 });
 
-
-// customer registration
-app.post('/registration', function (req, res) {
-    console.log(req.body);
-    connection.query(`INSERT INTO customer(name, phoneNumber, email, password) VALUES('${req.body.name}', '${req.body.number}', '${req.body.email}', '${req.body.password}')`, function (error, results, fields) {
-        if (error) throw error;
-        if (results) {
-            console.log('Done');
-            res.redirect('/registration')
-
-        }
-    });
-});
 
 //Authenticating user || Login post
 app.post('/auth', function (request, response) {
@@ -86,8 +74,10 @@ app.post('/auth', function (request, response) {
             if (results.length > 0) {
                 request.session.loggedin = true;
                 request.session.username = username;
-                request.session.id = results[0].idManager;
+                request.session.email = results[0].email;
+                console.log(`Id:${results[0].email} & session Id:${  request.session.email }`)
                 request.session.manager = true;
+                request.session.cashier = false;
                 response.redirect('/admin');
             } else {
                 connection.query('SELECT * FROM cashier WHERE email = ? AND password = ?', [username, password], function (error, results, fields) {
@@ -96,9 +86,11 @@ app.post('/auth', function (request, response) {
                         console.log(results[0].idCashier);
                         request.session.loggedin = true;
                         request.session.username = username;
-                        request.session.id = results[0].idCashier
+                        request.session.email = results[0].email;
                         request.session.cashier = true;
-                        response.redirect('/menu');
+                        request.session.manager = false;
+                        console.log(request.session.cashier)
+                        response.redirect('/sell');
                     } else {
                         if (error) { response.send(error) };
                         connection.query('SELECT * FROM customer WHERE email = ? AND password = ?', [username, password], function (error, results, fields) {
@@ -115,26 +107,11 @@ app.post('/auth', function (request, response) {
                 })
             }
             //if problem then comment out
-            response.end();
+            //response.end();
         });
     } else {
         //if problem then comment out
-        response.send('Please enter Username and Password!');
-        response.end();
-    }
-});
-
-
-app.get('/balance', function (req, res) {
-    res.render("balance.ejs");
-});
-
-//Selling Page
-app.get('/sell', (req, res) => {
-    if (!req.session.manager || !req.session.cashier) {
-        res.redirect('/');
-    }
-    else {
-        res.send('The Page')
+        //response.send('Please enter Username and Password!');
+        //response.end();
     }
 });
