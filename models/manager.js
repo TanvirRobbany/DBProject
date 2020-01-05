@@ -148,7 +148,7 @@ exports.getSellStatements = function(req,res){
         res.redirect('/');
     }
     else {
-        connection.query(`Select * from balance`, function (error, results, fields) {
+        connection.query(`select *  from cashier C, menu M, salestats S where C.email = S.receivedBy and M.idMenu = S.idMenu`, function (error, results, fields) {
             if (error) throw error;
             if (results) {
                 console.log(results);
